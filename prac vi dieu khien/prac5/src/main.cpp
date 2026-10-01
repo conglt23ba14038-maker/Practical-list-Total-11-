@@ -29,7 +29,7 @@ static void pwm_init(void)
 }
 static void adc_init(void)
 {
-    ADMUX = (1 << REFS0); /* Điện áp tham chiếu AVCC */
+    ADMUX = (1 << REFS0); 
 
     ADCSRA = (1 << ADEN)  |
              (1 << ADPS2) |
@@ -104,7 +104,7 @@ static void uart_send_uint16(uint16_t number)
 
 static void task_read_adc(void)
 {
-    adc_value = adc_read(0); /* ADC0, chân PC0/A0 */
+    adc_value = adc_read(0);
 }
 static void task_update_pwm(void)
 {
@@ -172,7 +172,7 @@ int main(void)
     uart_init();
     timer0_init();
 
-    /* Cho phép ngắt toàn cục */
+   
     sei();
 
     while (1)
