@@ -9,15 +9,14 @@
 #define BRC ((F_CPU/16/BAUD) - 1)
 #define DARK_THRESHOLD 512 
 
-// 7-Segment Bitmasks for 0-9 (Bit 6=G, Bit 0=A)
+
 const uint8_t digit_map[10] = {
     0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F
 };
 
-// Global array holding the 4 numbers to display
+
 volatile uint8_t display_buffer[4] = {0, 0, 0, 0};
 
-// --- Function Prototypes ---
 void init_hardware(void);
 uint16_t adc_read(uint8_t channel);
 void uart_print(const char* str);
@@ -88,8 +87,7 @@ void init_hardware(void) {
    
     ADCSRA = (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
 
-    // Timer0 Init for Display Multiplexing
-    // Prescaler 64 -> (16MHz / 64 / 256) = ~976 Hz overflow interrupt
+    
     TCCR0B = (1 << CS01) | (1 << CS00);
     TIMSK0 = (1 << TOIE0);
 
@@ -114,10 +112,10 @@ uint16_t adc_read(uint8_t channel) {
 
 void update_display_buffer(uint16_t value) {
     
-    display_buffer[0] = (value / 1000) % 10; // Thousands
-    display_buffer[1] = (value / 100) % 10;  // Hundreds
-    display_buffer[2] = (value / 10) % 10;   // Tens
-    display_buffer[3] = value % 10;          // Ones
+    display_buffer[0] = (value / 1000) % 10; 
+    display_buffer[1] = (value / 100) % 10;  
+    display_buffer[2] = (value / 10) % 10;   
+    display_buffer[3] = value % 10;         
 }
 
 void uart_print(const char* str) {
