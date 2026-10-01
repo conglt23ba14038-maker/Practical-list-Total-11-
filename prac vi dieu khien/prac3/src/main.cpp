@@ -53,7 +53,7 @@ int main(void)
             servo_set_angle((uint16_t)angle);
             _delay_ms(10);
         }
-        // Servo dừng, LED tắt
+        
         led_off();
         _delay_ms(500);
     }
